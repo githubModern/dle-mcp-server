@@ -238,7 +238,7 @@ MIT License — Free for personal and commercial use.
 
 ## 👨‍💻 Credits
 
-**Architecture & Development**: Senior PHP Engineering Team  
+**Tech Lead & Architecture**: [Atia Hegazy](https://atiaeno.com) — Senior PHP Engineering Team  
 **MCP Protocol**: [Model Context Protocol](https://modelcontextprotocol.io)  
 **DLE Platform**: [DataLife Engine](https://dle-news.ru)
 
