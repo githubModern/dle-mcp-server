@@ -1,0 +1,19 @@
+# Ignore everything except MCP plugin files
+*
+
+# Allow MCP module files
+!engine/
+engine/*
+!engine/modules/
+engine/modules/*
+!engine/modules/mcp/
+!engine/modules/mcp/**
+
+# Allow admin loader
+!engine/inc/
+engine/inc/*
+!engine/inc/mcp.php
+
+# Allow documentation
+!README.md
+!.gitignore

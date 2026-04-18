@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<dleplugin>
+    <name>DLE MCP Server</name>
+    <description>Full-site MCP HTTP/SSE server — control DLE via any AI client</description>
+    <icon>fa-plug</icon>
+    <version>1.0.0</version>
+    <dleversion>19.0</dleversion>
+    <versioncompare>greater_or_equal</versioncompare>
+    <active>0</active>
+    <needplugin></needplugin>
+    <mysqlenable></mysqlenable>
+    <mysqldisable></mysqldisable>
+    <phpinstall><![CDATA[global $db;
+$db->query("CREATE TABLE IF NOT EXISTS " . PREFIX . "_mcp_tokens (id INT(11) NOT NULL AUTO_INCREMENT, token VARCHAR(64) NOT NULL DEFAULT '', label VARCHAR(100) NOT NULL DEFAULT '', created_at INT(11) NOT NULL DEFAULT 0, last_used INT(11) NOT NULL DEFAULT 0, active TINYINT(1) NOT NULL DEFAULT 1, PRIMARY KEY (id), UNIQUE KEY token (token)) ENGINE=InnoDB DEFAULT CHARACTER SET " . COLLATE . " COLLATE " . COLLATE . "_general_ci");
+$db->query("CREATE TABLE IF NOT EXISTS " . PREFIX . "_mcp_logs (id INT(11) NOT NULL AUTO_INCREMENT, token_id INT(11) NOT NULL DEFAULT 0, tool VARCHAR(100) NOT NULL DEFAULT '', params TEXT NOT NULL, response_status VARCHAR(20) NOT NULL DEFAULT 'ok', ip VARCHAR(45) NOT NULL DEFAULT '', created_at INT(11) NOT NULL DEFAULT 0, PRIMARY KEY (id), KEY token_id (token_id), KEY created_at (created_at)) ENGINE=InnoDB DEFAULT CHARACTER SET " . COLLATE . " COLLATE " . COLLATE . "_general_ci");
+$db->query("CREATE TABLE IF NOT EXISTS " . PREFIX . "_mcp_settings (id INT(11) NOT NULL AUTO_INCREMENT, server_enabled TINYINT(1) NOT NULL DEFAULT 1, disabled_tools TEXT NOT NULL DEFAULT '', updated_at INT(11) NOT NULL DEFAULT 0, PRIMARY KEY (id)) ENGINE=InnoDB DEFAULT CHARACTER SET " . COLLATE . " COLLATE " . COLLATE . "_general_ci");
+$check = $db->super_query("SELECT COUNT(*) as c FROM " . PREFIX . "_mcp_settings");
+if ($check['c'] == 0) {
+    $db->query("INSERT INTO " . PREFIX . "_mcp_settings (server_enabled, disabled_tools, updated_at) VALUES (1, '', " . time() . ")");
+}
+]]></phpinstall>
+    <phpupgrade></phpupgrade>
+    <phpenable></phpenable>
+    <phpdisable></phpdisable>
+    <phpdelete><![CDATA[global $db;
+$db->query("DROP TABLE IF EXISTS " . PREFIX . "_mcp_tokens");
+$db->query("DROP TABLE IF EXISTS " . PREFIX . "_mcp_logs");
+$db->query("DROP TABLE IF EXISTS " . PREFIX . "_mcp_settings");
+]]></phpdelete>
+    <file name="engine/skins/default.skin.php">
+        <operation action="after">
+            <searchcode><![CDATA[array(
+            'name' => $lang['opt_xfil'],
+            'url' => "?mod=xfields",
+            'mod' => "xfields",
+            'access' => $user_group[$member_id['user_group']]['admin_xfields']
+        ),]]></searchcode>
+            <replacecode><![CDATA[array(
+            'name' => $lang['opt_xfil'],
+            'url' => "?mod=xfields",
+            'mod' => "xfields",
+            'access' => $user_group[$member_id['user_group']]['admin_xfields']
+        ),
+
+        array(
+            'name' => 'MCP Server',
+            'url' => "?mod=mcp",
+            'mod' => "mcp",
+            'access' => $user_group[$member_id['user_group']]['admin_xfields']
+        ),]]></replacecode>
+        </operation>
+    </file>
+    <file name="engine/inc/mcp.php">
+        <operation action="create">
+            <content><![CDATA[<?php
+if (!defined('DATALIFEENGINE') OR !defined('LOGGED_IN')) {
+    header("HTTP/1.1 403 Forbidden");
+    die("Hacking attempt!");
+}
+if (!$user_group[$member_id['user_group']]['admin_xfields'] && $member_id['user_group'] != '1') {
+    msg("error", $lang['index_denied'], $lang['index_denied']);
+}
+require_once (ENGINE_DIR . '/modules/mcp/admin.php');
+?>]]></content>
+        </operation>
+    </file>
+</dleplugin>
