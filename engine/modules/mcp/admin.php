@@ -1,4 +1,11 @@
 <?php
+/**
+ * DLE MCP Server — Admin Interface
+ *
+ * Copyright (c) 2026 Atia Hegazy — https://atiaeno.com
+ * All rights reserved.
+ */
+
 require_once __DIR__ . '/auth.class.php';
 
 // Get settings

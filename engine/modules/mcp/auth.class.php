@@ -1,4 +1,11 @@
 <?php
+/**
+ * DLE MCP Server — Token Authentication
+ *
+ * Copyright (c) 2026 Atia Hegazy — https://atiaeno.com
+ * All rights reserved.
+ */
+
 class MCPAuth {
 
     public static function validate() {

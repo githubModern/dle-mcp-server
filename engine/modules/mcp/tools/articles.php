@@ -1,4 +1,11 @@
 <?php
+/**
+ * DLE MCP Server — Articles Tool
+ *
+ * Copyright (c) 2026 Atia Hegazy — https://atiaeno.com
+ * All rights reserved.
+ */
+
 class MCPToolArticles {
     public static function register($server) {
         global $db;

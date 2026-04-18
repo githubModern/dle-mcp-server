@@ -1,4 +1,11 @@
 <?php
+/**
+ * DLE MCP Server — Admin Loader
+ *
+ * Copyright (c) 2026 Atia Hegazy — https://atiaeno.com
+ * All rights reserved.
+ */
+
 if (!defined('DATALIFEENGINE') OR !defined('LOGGED_IN')) {
     header("HTTP/1.1 403 Forbidden");
     die("Hacking attempt!");

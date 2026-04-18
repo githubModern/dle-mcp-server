@@ -1,4 +1,11 @@
 <?php
+/**
+ * DLE MCP Server — Static Pages Tool
+ *
+ * Copyright (c) 2026 Atia Hegazy — https://atiaeno.com
+ * All rights reserved.
+ */
+
 class MCPToolStaticPages {
     public static function register($server) {
         global $db;

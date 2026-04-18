@@ -1,4 +1,11 @@
 <?php
+/**
+ * DLE MCP Server — UserGroups Tool
+ *
+ * Copyright (c) 2026 Atia Hegazy — https://atiaeno.com
+ * All rights reserved.
+ */
+
 class MCPToolUserGroups {
     public static function register($server) {
         global $db;

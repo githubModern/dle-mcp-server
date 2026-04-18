@@ -1,4 +1,11 @@
 <?php
+/**
+ * DLE MCP Server — MCP Protocol Engine
+ *
+ * Copyright (c) 2026 Atia Hegazy — https://atiaeno.com
+ * All rights reserved.
+ */
+
 class MCPServer {
 
     private $tools = [];

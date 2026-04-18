@@ -1,4 +1,15 @@
 <?php
+/**
+ * DLE MCP Server
+ * AI-Powered Control for DataLife Engine
+ *
+ * Copyright (c) 2026 Atia Hegazy — https://atiaeno.com
+ * All rights reserved.
+ *
+ * MCP Protocol Bridge with 53 tools for full DLE control
+ * JSON-RPC 2.0 | HTTP/SSE Transport | Bearer Token Auth
+ */
+
 define('DATALIFEENGINE', true);
 define('ROOT_DIR', dirname(dirname(dirname(dirname(__FILE__)))));
 define('ENGINE_DIR', ROOT_DIR . '/engine');
